@@ -1,0 +1,61 @@
+// ConsoleApplication25.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+// Пример перегруженной функции
+
+
+#include <iostream>
+
+using namespace std;
+
+const double Pi = 3.14159;
+
+double Area(double Radius); 					// Исходная функция 'Area' для вычисления площади круга (имеет один аргумент: 'Radius')
+double Area(double Radius, double Height); 		// Перегруженная функция 'Area' для вычисления площади цилиндра (имеет два аргумента: 'Radius' и 'Height')
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+
+	cout << "Площадь какой фигуры надо найти. Введите '1' для нахождения площади круга или '2' для нахождения площади цилиндра: ";
+	char Choice = '2';
+	cin >> Choice;
+
+	if (Choice != '1')
+	{
+		if (Choice != '2')
+		{
+			cout << "Ошибка выбора из меню: Для выбора фигуры можно указывать только значения '1' или '2'";
+			return 0;
+		}
+	}
+
+	cout << "Укажите радиус, см: ";
+	double Radius = 0;
+	cin >> Radius;
+
+	if (Choice == '2')
+	{
+		cout << "Укажите высоту цилиндра, см: ";
+		double Height = 0;
+		cin >> Height;
+
+		// Вызов перегруженной версии Area для цилиндра
+		cout << "Площадь цилиндра равна: " << Area(Radius, Height) << " кв.см" << endl;
+	}
+	else
+		cout << "Площадь круга равна: " << Area(Radius) << " кв.см" << endl;
+
+	return 0;
+}
+
+// Исходная функция для вычисления площади круга
+double Area(double Radius)
+{
+	return Pi * Radius * Radius;
+}
+
+// Перегруженная функция для вычисления площади цилиндра
+double Area(double Radius, double Height)
+{
+	// Повторное использование версии функции для вычисления площади круга
+	return 2 * Area(Radius) + 2 * Pi * Radius * Height;
+}
